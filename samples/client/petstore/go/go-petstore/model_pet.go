@@ -26,6 +26,16 @@ type Pet struct {
 	Tags []Tag `json:"tags,omitempty"`
 	// pet status in the store
 	Status *string `json:"status,omitempty"`
+	ScalarInt32 *int32 `json:"scalar_int32,omitempty"`
+	ScalarInt64 *int64 `json:"scalar_int64,omitempty"`
+	ScalarFloat32 *float32 `json:"scalar_float32,omitempty"`
+	ScalarFloat64 *float64 `json:"scalar_float64,omitempty"`
+	ArrayInt32 []int32 `json:"array_int32,omitempty"`
+	ArrayInt64 []int64 `json:"array_int64,omitempty"`
+	ArrayFloat32 []float32 `json:"array_float32,omitempty"`
+	ArrayFloat64 []float64 `json:"array_float64,omitempty"`
+	ScalarString *string `json:"scalar_string,omitempty"`
+	ScalarBoolean *bool `json:"scalar_boolean,omitempty"`
 }
 
 // NewPet instantiates a new Pet object
@@ -36,6 +46,18 @@ func NewPet(name string, photoUrls []string) *Pet {
 	this := Pet{}
 	this.Name = name
 	this.PhotoUrls = photoUrls
+	var scalarInt32 int32 = 19
+	this.ScalarInt32 = &scalarInt32
+	var scalarInt64 int64 = 19
+	this.ScalarInt64 = &scalarInt64
+	var scalarFloat32 float32 = 19.19
+	this.ScalarFloat32 = &scalarFloat32
+	var scalarFloat64 float64 = 19.19
+	this.ScalarFloat64 = &scalarFloat64
+	var scalarString string = "19"
+	this.ScalarString = &scalarString
+	var scalarBoolean bool = true
+	this.ScalarBoolean = &scalarBoolean
 	return &this
 }
 
@@ -44,6 +66,18 @@ func NewPet(name string, photoUrls []string) *Pet {
 // but it doesn't guarantee that properties required by API are set
 func NewPetWithDefaults() *Pet {
 	this := Pet{}
+	var scalarInt32 int32 = 19
+	this.ScalarInt32 = &scalarInt32
+	var scalarInt64 int64 = 19
+	this.ScalarInt64 = &scalarInt64
+	var scalarFloat32 float32 = 19.19
+	this.ScalarFloat32 = &scalarFloat32
+	var scalarFloat64 float64 = 19.19
+	this.ScalarFloat64 = &scalarFloat64
+	var scalarString string = "19"
+	this.ScalarString = &scalarString
+	var scalarBoolean bool = true
+	this.ScalarBoolean = &scalarBoolean
 	return &this
 }
 
@@ -223,6 +257,326 @@ func (o *Pet) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetScalarInt32 returns the ScalarInt32 field value if set, zero value otherwise.
+func (o *Pet) GetScalarInt32() int32 {
+	if o == nil || IsNil(o.ScalarInt32) {
+		var ret int32
+		return ret
+	}
+	return *o.ScalarInt32
+}
+
+// GetScalarInt32Ok returns a tuple with the ScalarInt32 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarInt32Ok() (*int32, bool) {
+	if o == nil || IsNil(o.ScalarInt32) {
+		return nil, false
+	}
+	return o.ScalarInt32, true
+}
+
+// HasScalarInt32 returns a boolean if a field has been set.
+func (o *Pet) HasScalarInt32() bool {
+	if o != nil && !IsNil(o.ScalarInt32) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarInt32 gets a reference to the given int32 and assigns it to the ScalarInt32 field.
+func (o *Pet) SetScalarInt32(v int32) {
+	o.ScalarInt32 = &v
+}
+
+// GetScalarInt64 returns the ScalarInt64 field value if set, zero value otherwise.
+func (o *Pet) GetScalarInt64() int64 {
+	if o == nil || IsNil(o.ScalarInt64) {
+		var ret int64
+		return ret
+	}
+	return *o.ScalarInt64
+}
+
+// GetScalarInt64Ok returns a tuple with the ScalarInt64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarInt64Ok() (*int64, bool) {
+	if o == nil || IsNil(o.ScalarInt64) {
+		return nil, false
+	}
+	return o.ScalarInt64, true
+}
+
+// HasScalarInt64 returns a boolean if a field has been set.
+func (o *Pet) HasScalarInt64() bool {
+	if o != nil && !IsNil(o.ScalarInt64) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarInt64 gets a reference to the given int64 and assigns it to the ScalarInt64 field.
+func (o *Pet) SetScalarInt64(v int64) {
+	o.ScalarInt64 = &v
+}
+
+// GetScalarFloat32 returns the ScalarFloat32 field value if set, zero value otherwise.
+func (o *Pet) GetScalarFloat32() float32 {
+	if o == nil || IsNil(o.ScalarFloat32) {
+		var ret float32
+		return ret
+	}
+	return *o.ScalarFloat32
+}
+
+// GetScalarFloat32Ok returns a tuple with the ScalarFloat32 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarFloat32Ok() (*float32, bool) {
+	if o == nil || IsNil(o.ScalarFloat32) {
+		return nil, false
+	}
+	return o.ScalarFloat32, true
+}
+
+// HasScalarFloat32 returns a boolean if a field has been set.
+func (o *Pet) HasScalarFloat32() bool {
+	if o != nil && !IsNil(o.ScalarFloat32) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarFloat32 gets a reference to the given float32 and assigns it to the ScalarFloat32 field.
+func (o *Pet) SetScalarFloat32(v float32) {
+	o.ScalarFloat32 = &v
+}
+
+// GetScalarFloat64 returns the ScalarFloat64 field value if set, zero value otherwise.
+func (o *Pet) GetScalarFloat64() float64 {
+	if o == nil || IsNil(o.ScalarFloat64) {
+		var ret float64
+		return ret
+	}
+	return *o.ScalarFloat64
+}
+
+// GetScalarFloat64Ok returns a tuple with the ScalarFloat64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarFloat64Ok() (*float64, bool) {
+	if o == nil || IsNil(o.ScalarFloat64) {
+		return nil, false
+	}
+	return o.ScalarFloat64, true
+}
+
+// HasScalarFloat64 returns a boolean if a field has been set.
+func (o *Pet) HasScalarFloat64() bool {
+	if o != nil && !IsNil(o.ScalarFloat64) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarFloat64 gets a reference to the given float64 and assigns it to the ScalarFloat64 field.
+func (o *Pet) SetScalarFloat64(v float64) {
+	o.ScalarFloat64 = &v
+}
+
+// GetArrayInt32 returns the ArrayInt32 field value if set, zero value otherwise.
+func (o *Pet) GetArrayInt32() []int32 {
+	if o == nil || IsNil(o.ArrayInt32) {
+		var ret []int32
+		return ret
+	}
+	return o.ArrayInt32
+}
+
+// GetArrayInt32Ok returns a tuple with the ArrayInt32 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetArrayInt32Ok() ([]int32, bool) {
+	if o == nil || IsNil(o.ArrayInt32) {
+		return nil, false
+	}
+	return o.ArrayInt32, true
+}
+
+// HasArrayInt32 returns a boolean if a field has been set.
+func (o *Pet) HasArrayInt32() bool {
+	if o != nil && !IsNil(o.ArrayInt32) {
+		return true
+	}
+
+	return false
+}
+
+// SetArrayInt32 gets a reference to the given []int32 and assigns it to the ArrayInt32 field.
+func (o *Pet) SetArrayInt32(v []int32) {
+	o.ArrayInt32 = v
+}
+
+// GetArrayInt64 returns the ArrayInt64 field value if set, zero value otherwise.
+func (o *Pet) GetArrayInt64() []int64 {
+	if o == nil || IsNil(o.ArrayInt64) {
+		var ret []int64
+		return ret
+	}
+	return o.ArrayInt64
+}
+
+// GetArrayInt64Ok returns a tuple with the ArrayInt64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetArrayInt64Ok() ([]int64, bool) {
+	if o == nil || IsNil(o.ArrayInt64) {
+		return nil, false
+	}
+	return o.ArrayInt64, true
+}
+
+// HasArrayInt64 returns a boolean if a field has been set.
+func (o *Pet) HasArrayInt64() bool {
+	if o != nil && !IsNil(o.ArrayInt64) {
+		return true
+	}
+
+	return false
+}
+
+// SetArrayInt64 gets a reference to the given []int64 and assigns it to the ArrayInt64 field.
+func (o *Pet) SetArrayInt64(v []int64) {
+	o.ArrayInt64 = v
+}
+
+// GetArrayFloat32 returns the ArrayFloat32 field value if set, zero value otherwise.
+func (o *Pet) GetArrayFloat32() []float32 {
+	if o == nil || IsNil(o.ArrayFloat32) {
+		var ret []float32
+		return ret
+	}
+	return o.ArrayFloat32
+}
+
+// GetArrayFloat32Ok returns a tuple with the ArrayFloat32 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetArrayFloat32Ok() ([]float32, bool) {
+	if o == nil || IsNil(o.ArrayFloat32) {
+		return nil, false
+	}
+	return o.ArrayFloat32, true
+}
+
+// HasArrayFloat32 returns a boolean if a field has been set.
+func (o *Pet) HasArrayFloat32() bool {
+	if o != nil && !IsNil(o.ArrayFloat32) {
+		return true
+	}
+
+	return false
+}
+
+// SetArrayFloat32 gets a reference to the given []float32 and assigns it to the ArrayFloat32 field.
+func (o *Pet) SetArrayFloat32(v []float32) {
+	o.ArrayFloat32 = v
+}
+
+// GetArrayFloat64 returns the ArrayFloat64 field value if set, zero value otherwise.
+func (o *Pet) GetArrayFloat64() []float64 {
+	if o == nil || IsNil(o.ArrayFloat64) {
+		var ret []float64
+		return ret
+	}
+	return o.ArrayFloat64
+}
+
+// GetArrayFloat64Ok returns a tuple with the ArrayFloat64 field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetArrayFloat64Ok() ([]float64, bool) {
+	if o == nil || IsNil(o.ArrayFloat64) {
+		return nil, false
+	}
+	return o.ArrayFloat64, true
+}
+
+// HasArrayFloat64 returns a boolean if a field has been set.
+func (o *Pet) HasArrayFloat64() bool {
+	if o != nil && !IsNil(o.ArrayFloat64) {
+		return true
+	}
+
+	return false
+}
+
+// SetArrayFloat64 gets a reference to the given []float64 and assigns it to the ArrayFloat64 field.
+func (o *Pet) SetArrayFloat64(v []float64) {
+	o.ArrayFloat64 = v
+}
+
+// GetScalarString returns the ScalarString field value if set, zero value otherwise.
+func (o *Pet) GetScalarString() string {
+	if o == nil || IsNil(o.ScalarString) {
+		var ret string
+		return ret
+	}
+	return *o.ScalarString
+}
+
+// GetScalarStringOk returns a tuple with the ScalarString field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarStringOk() (*string, bool) {
+	if o == nil || IsNil(o.ScalarString) {
+		return nil, false
+	}
+	return o.ScalarString, true
+}
+
+// HasScalarString returns a boolean if a field has been set.
+func (o *Pet) HasScalarString() bool {
+	if o != nil && !IsNil(o.ScalarString) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarString gets a reference to the given string and assigns it to the ScalarString field.
+func (o *Pet) SetScalarString(v string) {
+	o.ScalarString = &v
+}
+
+// GetScalarBoolean returns the ScalarBoolean field value if set, zero value otherwise.
+func (o *Pet) GetScalarBoolean() bool {
+	if o == nil || IsNil(o.ScalarBoolean) {
+		var ret bool
+		return ret
+	}
+	return *o.ScalarBoolean
+}
+
+// GetScalarBooleanOk returns a tuple with the ScalarBoolean field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Pet) GetScalarBooleanOk() (*bool, bool) {
+	if o == nil || IsNil(o.ScalarBoolean) {
+		return nil, false
+	}
+	return o.ScalarBoolean, true
+}
+
+// HasScalarBoolean returns a boolean if a field has been set.
+func (o *Pet) HasScalarBoolean() bool {
+	if o != nil && !IsNil(o.ScalarBoolean) {
+		return true
+	}
+
+	return false
+}
+
+// SetScalarBoolean gets a reference to the given bool and assigns it to the ScalarBoolean field.
+func (o *Pet) SetScalarBoolean(v bool) {
+	o.ScalarBoolean = &v
+}
+
 func (o Pet) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -246,6 +600,36 @@ func (o Pet) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.ScalarInt32) {
+		toSerialize["scalar_int32"] = o.ScalarInt32
+	}
+	if !IsNil(o.ScalarInt64) {
+		toSerialize["scalar_int64"] = o.ScalarInt64
+	}
+	if !IsNil(o.ScalarFloat32) {
+		toSerialize["scalar_float32"] = o.ScalarFloat32
+	}
+	if !IsNil(o.ScalarFloat64) {
+		toSerialize["scalar_float64"] = o.ScalarFloat64
+	}
+	if !IsNil(o.ArrayInt32) {
+		toSerialize["array_int32"] = o.ArrayInt32
+	}
+	if !IsNil(o.ArrayInt64) {
+		toSerialize["array_int64"] = o.ArrayInt64
+	}
+	if !IsNil(o.ArrayFloat32) {
+		toSerialize["array_float32"] = o.ArrayFloat32
+	}
+	if !IsNil(o.ArrayFloat64) {
+		toSerialize["array_float64"] = o.ArrayFloat64
+	}
+	if !IsNil(o.ScalarString) {
+		toSerialize["scalar_string"] = o.ScalarString
+	}
+	if !IsNil(o.ScalarBoolean) {
+		toSerialize["scalar_boolean"] = o.ScalarBoolean
 	}
 	return toSerialize, nil
 }

@@ -39,9 +39,13 @@ type PetApi interface {
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param petId Pet id to delete
+	@param scalarInt32
+	@param scalarInt64
+	@param scalarFloat32
+	@param scalarFloat64
 	@return ApiDeletePetRequest
 	*/
-	DeletePet(ctx context.Context, petId int64) ApiDeletePetRequest
+	DeletePet(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiDeletePetRequest
 
 	// DeletePetExecute executes the request
 	DeletePetExecute(r ApiDeletePetRequest) (*http.Response, error)
@@ -84,9 +88,13 @@ type PetApi interface {
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param petId ID of pet to return
+	@param scalarInt32
+	@param scalarInt64
+	@param scalarFloat32
+	@param scalarFloat64
 	@return ApiGetPetByIdRequest
 	*/
-	GetPetById(ctx context.Context, petId int64) ApiGetPetByIdRequest
+	GetPetById(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiGetPetByIdRequest
 
 	// GetPetByIdExecute executes the request
 	//  @return Pet
@@ -108,9 +116,13 @@ type PetApi interface {
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param petId ID of pet that needs to be updated
+	@param scalarInt32
+	@param scalarInt64
+	@param scalarFloat32
+	@param scalarFloat64
 	@return ApiUpdatePetWithFormRequest
 	*/
-	UpdatePetWithForm(ctx context.Context, petId int64) ApiUpdatePetWithFormRequest
+	UpdatePetWithForm(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiUpdatePetWithFormRequest
 
 	// UpdatePetWithFormExecute executes the request
 	UpdatePetWithFormExecute(r ApiUpdatePetWithFormRequest) (*http.Response, error)
@@ -247,6 +259,10 @@ type ApiDeletePetRequest struct {
 	ctx context.Context
 	ApiService PetApi
 	petId int64
+	scalarInt32 int32
+	scalarInt64 int64
+	scalarFloat32 float32
+	scalarFloat64 float64
 	apiKey *string
 }
 
@@ -264,13 +280,21 @@ DeletePet Deletes a pet
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param petId Pet id to delete
+ @param scalarInt32
+ @param scalarInt64
+ @param scalarFloat32
+ @param scalarFloat64
  @return ApiDeletePetRequest
 */
-func (a *PetApiService) DeletePet(ctx context.Context, petId int64) ApiDeletePetRequest {
+func (a *PetApiService) DeletePet(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiDeletePetRequest {
 	return ApiDeletePetRequest{
 		ApiService: a,
 		ctx: ctx,
 		petId: petId,
+		scalarInt32: scalarInt32,
+		scalarInt64: scalarInt64,
+		scalarFloat32: scalarFloat32,
+		scalarFloat64: scalarFloat64,
 	}
 }
 
@@ -287,8 +311,12 @@ func (a *PetApiService) DeletePetExecute(r ApiDeletePetRequest) (*http.Response,
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pet/{petId}"
+	localVarPath := localBasePath + "/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}"
 	localVarPath = strings.Replace(localVarPath, "{"+"petId"+"}", url.PathEscape(parameterValueToString(r.petId, "petId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt32"+"}", url.PathEscape(parameterValueToString(r.scalarInt32, "scalarInt32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt64"+"}", url.PathEscape(parameterValueToString(r.scalarInt64, "scalarInt64")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat32"+"}", url.PathEscape(parameterValueToString(r.scalarFloat32, "scalarFloat32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat64"+"}", url.PathEscape(parameterValueToString(r.scalarFloat64, "scalarFloat64")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -346,11 +374,71 @@ type ApiFindPetsByStatusRequest struct {
 	ctx context.Context
 	ApiService PetApi
 	status *[]string
+	scalarInt32 *int32
+	scalarInt64 *int64
+	scalarFloat32 *float32
+	scalarFloat64 *float64
+	arrayInt32 *[]int32
+	arrayInt64 *[]int64
+	arrayFloat32 *[]float32
+	arrayFloat64 *[]float64
+	scalarString *string
+	scalarBoolean *bool
 }
 
 // Status values that need to be considered for filter
 func (r ApiFindPetsByStatusRequest) Status(status []string) ApiFindPetsByStatusRequest {
 	r.status = &status
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarInt32(scalarInt32 int32) ApiFindPetsByStatusRequest {
+	r.scalarInt32 = &scalarInt32
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarInt64(scalarInt64 int64) ApiFindPetsByStatusRequest {
+	r.scalarInt64 = &scalarInt64
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarFloat32(scalarFloat32 float32) ApiFindPetsByStatusRequest {
+	r.scalarFloat32 = &scalarFloat32
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarFloat64(scalarFloat64 float64) ApiFindPetsByStatusRequest {
+	r.scalarFloat64 = &scalarFloat64
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ArrayInt32(arrayInt32 []int32) ApiFindPetsByStatusRequest {
+	r.arrayInt32 = &arrayInt32
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ArrayInt64(arrayInt64 []int64) ApiFindPetsByStatusRequest {
+	r.arrayInt64 = &arrayInt64
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ArrayFloat32(arrayFloat32 []float32) ApiFindPetsByStatusRequest {
+	r.arrayFloat32 = &arrayFloat32
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ArrayFloat64(arrayFloat64 []float64) ApiFindPetsByStatusRequest {
+	r.arrayFloat64 = &arrayFloat64
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarString(scalarString string) ApiFindPetsByStatusRequest {
+	r.scalarString = &scalarString
+	return r
+}
+
+func (r ApiFindPetsByStatusRequest) ScalarBoolean(scalarBoolean bool) ApiFindPetsByStatusRequest {
+	r.scalarBoolean = &scalarBoolean
 	return r
 }
 
@@ -398,6 +486,36 @@ func (a *PetApiService) FindPetsByStatusExecute(r ApiFindPetsByStatusRequest) ([
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "csv")
+	if r.scalarInt32 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarInt32", r.scalarInt32, "")
+	}
+	if r.scalarInt64 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarInt64", r.scalarInt64, "")
+	}
+	if r.scalarFloat32 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarFloat32", r.scalarFloat32, "")
+	}
+	if r.scalarFloat64 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarFloat64", r.scalarFloat64, "")
+	}
+	if r.arrayInt32 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "arrayInt32", r.arrayInt32, "csv")
+	}
+	if r.arrayInt64 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "arrayInt64", r.arrayInt64, "csv")
+	}
+	if r.arrayFloat32 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "arrayFloat32", r.arrayFloat32, "csv")
+	}
+	if r.arrayFloat64 != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "arrayFloat64", r.arrayFloat64, "csv")
+	}
+	if r.scalarString != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarString", r.scalarString, "")
+	}
+	if r.scalarBoolean != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scalarBoolean", r.scalarBoolean, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -569,6 +687,10 @@ type ApiGetPetByIdRequest struct {
 	ctx context.Context
 	ApiService PetApi
 	petId int64
+	scalarInt32 int32
+	scalarInt64 int64
+	scalarFloat32 float32
+	scalarFloat64 float64
 }
 
 func (r ApiGetPetByIdRequest) Execute() (*Pet, *http.Response, error) {
@@ -582,13 +704,21 @@ Returns a single pet
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param petId ID of pet to return
+ @param scalarInt32
+ @param scalarInt64
+ @param scalarFloat32
+ @param scalarFloat64
  @return ApiGetPetByIdRequest
 */
-func (a *PetApiService) GetPetById(ctx context.Context, petId int64) ApiGetPetByIdRequest {
+func (a *PetApiService) GetPetById(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiGetPetByIdRequest {
 	return ApiGetPetByIdRequest{
 		ApiService: a,
 		ctx: ctx,
 		petId: petId,
+		scalarInt32: scalarInt32,
+		scalarInt64: scalarInt64,
+		scalarFloat32: scalarFloat32,
+		scalarFloat64: scalarFloat64,
 	}
 }
 
@@ -607,8 +737,12 @@ func (a *PetApiService) GetPetByIdExecute(r ApiGetPetByIdRequest) (*Pet, *http.R
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pet/{petId}"
+	localVarPath := localBasePath + "/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}"
 	localVarPath = strings.Replace(localVarPath, "{"+"petId"+"}", url.PathEscape(parameterValueToString(r.petId, "petId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt32"+"}", url.PathEscape(parameterValueToString(r.scalarInt32, "scalarInt32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt64"+"}", url.PathEscape(parameterValueToString(r.scalarInt64, "scalarInt64")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat32"+"}", url.PathEscape(parameterValueToString(r.scalarFloat32, "scalarFloat32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat64"+"}", url.PathEscape(parameterValueToString(r.scalarFloat64, "scalarFloat64")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -784,6 +918,10 @@ type ApiUpdatePetWithFormRequest struct {
 	ctx context.Context
 	ApiService PetApi
 	petId int64
+	scalarInt32 int32
+	scalarInt64 int64
+	scalarFloat32 float32
+	scalarFloat64 float64
 	name *string
 	status *string
 }
@@ -809,13 +947,21 @@ UpdatePetWithForm Updates a pet in the store with form data
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param petId ID of pet that needs to be updated
+ @param scalarInt32
+ @param scalarInt64
+ @param scalarFloat32
+ @param scalarFloat64
  @return ApiUpdatePetWithFormRequest
 */
-func (a *PetApiService) UpdatePetWithForm(ctx context.Context, petId int64) ApiUpdatePetWithFormRequest {
+func (a *PetApiService) UpdatePetWithForm(ctx context.Context, petId int64, scalarInt32 int32, scalarInt64 int64, scalarFloat32 float32, scalarFloat64 float64) ApiUpdatePetWithFormRequest {
 	return ApiUpdatePetWithFormRequest{
 		ApiService: a,
 		ctx: ctx,
 		petId: petId,
+		scalarInt32: scalarInt32,
+		scalarInt64: scalarInt64,
+		scalarFloat32: scalarFloat32,
+		scalarFloat64: scalarFloat64,
 	}
 }
 
@@ -832,8 +978,12 @@ func (a *PetApiService) UpdatePetWithFormExecute(r ApiUpdatePetWithFormRequest) 
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/pet/{petId}"
+	localVarPath := localBasePath + "/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}"
 	localVarPath = strings.Replace(localVarPath, "{"+"petId"+"}", url.PathEscape(parameterValueToString(r.petId, "petId")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt32"+"}", url.PathEscape(parameterValueToString(r.scalarInt32, "scalarInt32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarInt64"+"}", url.PathEscape(parameterValueToString(r.scalarInt64, "scalarInt64")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat32"+"}", url.PathEscape(parameterValueToString(r.scalarFloat32, "scalarFloat32")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"scalarFloat64"+"}", url.PathEscape(parameterValueToString(r.scalarFloat64, "scalarFloat64")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

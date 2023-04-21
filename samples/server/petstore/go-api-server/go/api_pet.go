@@ -57,7 +57,7 @@ func (c *PetApiController) Routes() Routes {
 		},
 		"DeletePet": Route{
 			strings.ToUpper("Delete"),
-			"/v2/pet/{petId}",
+			"/v2/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}",
 			c.DeletePet,
 		},
 		"FindPetsByStatus": Route{
@@ -72,7 +72,7 @@ func (c *PetApiController) Routes() Routes {
 		},
 		"GetPetById": Route{
 			strings.ToUpper("Get"),
-			"/v2/pet/{petId}",
+			"/v2/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}",
 			c.GetPetById,
 		},
 		"UpdatePet": Route{
@@ -82,7 +82,7 @@ func (c *PetApiController) Routes() Routes {
 		},
 		"UpdatePetWithForm": Route{
 			strings.ToUpper("Post"),
-			"/v2/pet/{petId}",
+			"/v2/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}",
 			c.UpdatePetWithForm,
 		},
 		"UploadFile": Route{
@@ -128,8 +128,28 @@ func (c *PetApiController) DeletePet(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
+	scalarInt32Param, err := parseInt32Parameter(params["scalarInt32"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarInt64Param, err := parseInt64Parameter(params["scalarInt64"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat32Param, err := parseFloat32Parameter(params["scalarFloat32"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat64Param, err := parseFloat64Parameter(params["scalarFloat64"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
 	apiKeyParam := r.Header.Get("api_key")
-	result, err := c.service.DeletePet(r.Context(), petIdParam, apiKeyParam)
+	result, err := c.service.DeletePet(r.Context(), petIdParam, scalarInt32Param, scalarInt64Param, scalarFloat32Param, scalarFloat64Param, apiKeyParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -143,7 +163,56 @@ func (c *PetApiController) DeletePet(w http.ResponseWriter, r *http.Request) {
 func (c *PetApiController) FindPetsByStatus(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query()
 	statusParam := strings.Split(query.Get("status"), ",")
-	result, err := c.service.FindPetsByStatus(r.Context(), statusParam)
+	scalarInt32Param, err := parseInt32Parameter(query.Get("scalarInt32"), false, WithDefault(int64(19)), WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarInt64Param, err := parseInt64Parameter(query.Get("scalarInt64"), false, WithDefault(int64(19)), WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat32Param, err := parseFloat32Parameter(query.Get("scalarFloat32"), false, WithDefault(float64(19.19)), WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat64Param, err := parseFloat64Parameter(query.Get("scalarFloat64"), false, WithDefault(float64(19.19)), WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	arrayInt32Param, err := parseInt32ArrayParameter(query.Get("arrayInt32"), ",", false)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	arrayInt64Param, err := parseInt64ArrayParameter(query.Get("arrayInt64"), ",", false)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	arrayFloat32Param, err := parseFloat32ArrayParameter(query.Get("arrayFloat32"), ",", false)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+	return
+	}
+	arrayFloat64Param, err := parseFloat64ArrayParameter(query.Get("arrayFloat64"), ",", false)
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarStringParam := "19"
+	if query.Has("scalarString") {
+		scalarStringParam = query.Get("scalarString")
+	}
+	scalarBooleanParam, err := parseBoolParameter(query.Get("scalarBoolean"), false, WithDefault(true))
+	if err != nil {
+		w.WriteHeader(500)
+		return
+	}
+	result, err := c.service.FindPetsByStatus(r.Context(), statusParam, scalarInt32Param, scalarInt64Param, scalarFloat32Param, scalarFloat64Param, arrayInt32Param, arrayInt64Param, arrayFloat32Param, arrayFloat64Param, scalarStringParam, scalarBooleanParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -176,7 +245,27 @@ func (c *PetApiController) GetPetById(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
-	result, err := c.service.GetPetById(r.Context(), petIdParam)
+	scalarInt32Param, err := parseInt32Parameter(params["scalarInt32"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarInt64Param, err := parseInt64Parameter(params["scalarInt64"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat32Param, err := parseFloat32Parameter(params["scalarFloat32"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat64Param, err := parseFloat64Parameter(params["scalarFloat64"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	result, err := c.service.GetPetById(r.Context(), petIdParam, scalarInt32Param, scalarInt64Param, scalarFloat32Param, scalarFloat64Param)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)
@@ -225,9 +314,29 @@ func (c *PetApiController) UpdatePetWithForm(w http.ResponseWriter, r *http.Requ
 		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
 		return
 	}
+	scalarInt32Param, err := parseInt32Parameter(params["scalarInt32"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarInt64Param, err := parseInt64Parameter(params["scalarInt64"], true, WithMinimum(int64(17)), WithMaximum(int64(42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat32Param, err := parseFloat32Parameter(params["scalarFloat32"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
+	scalarFloat64Param, err := parseFloat64Parameter(params["scalarFloat64"], true, WithMinimum(float64(17.17)), WithMaximum(float64(42.42)))
+	if err != nil {
+		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
+		return
+	}
 				nameParam := r.FormValue("name")
 				statusParam := r.FormValue("status")
-	result, err := c.service.UpdatePetWithForm(r.Context(), petIdParam, nameParam, statusParam)
+	result, err := c.service.UpdatePetWithForm(r.Context(), petIdParam, scalarInt32Param, scalarInt64Param, scalarFloat32Param, scalarFloat64Param, nameParam, statusParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

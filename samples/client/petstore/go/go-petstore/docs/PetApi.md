@@ -5,12 +5,12 @@ All URIs are relative to *http://petstore.swagger.io:80/v2*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddPet**](PetApi.md#AddPet) | **Post** /pet | Add a new pet to the store
-[**DeletePet**](PetApi.md#DeletePet) | **Delete** /pet/{petId} | Deletes a pet
+[**DeletePet**](PetApi.md#DeletePet) | **Delete** /pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64} | Deletes a pet
 [**FindPetsByStatus**](PetApi.md#FindPetsByStatus) | **Get** /pet/findByStatus | Finds Pets by status
 [**FindPetsByTags**](PetApi.md#FindPetsByTags) | **Get** /pet/findByTags | Finds Pets by tags
-[**GetPetById**](PetApi.md#GetPetById) | **Get** /pet/{petId} | Find pet by ID
+[**GetPetById**](PetApi.md#GetPetById) | **Get** /pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64} | Find pet by ID
 [**UpdatePet**](PetApi.md#UpdatePet) | **Put** /pet | Update an existing pet
-[**UpdatePetWithForm**](PetApi.md#UpdatePetWithForm) | **Post** /pet/{petId} | Updates a pet in the store with form data
+[**UpdatePetWithForm**](PetApi.md#UpdatePetWithForm) | **Post** /pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64} | Updates a pet in the store with form data
 [**UploadFile**](PetApi.md#UploadFile) | **Post** /pet/{petId}/uploadImage | uploads an image
 [**UploadFileWithRequiredFile**](PetApi.md#UploadFileWithRequiredFile) | **Post** /fake/{petId}/uploadImageWithRequiredFile | uploads an image (required)
 
@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## DeletePet
 
-> DeletePet(ctx, petId).ApiKey(apiKey).Execute()
+> DeletePet(ctx, petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).ApiKey(apiKey).Execute()
 
 Deletes a pet
 
@@ -98,11 +98,15 @@ import (
 
 func main() {
     petId := int64(789) // int64 | Pet id to delete
+    scalarInt32 := int32(56) // int32 | 
+    scalarInt64 := int64(789) // int64 | 
+    scalarFloat32 := float32(3.4) // float32 | 
+    scalarFloat64 := float64(1.2) // float64 | 
     apiKey := "apiKey_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.PetApi.DeletePet(context.Background(), petId).ApiKey(apiKey).Execute()
+    r, err := apiClient.PetApi.DeletePet(context.Background(), petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).ApiKey(apiKey).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PetApi.DeletePet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -117,6 +121,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **petId** | **int64** | Pet id to delete | 
+**scalarInt32** | **int32** |  | 
+**scalarInt64** | **int64** |  | 
+**scalarFloat32** | **float32** |  | 
+**scalarFloat64** | **float64** |  | 
 
 ### Other Parameters
 
@@ -125,6 +133,10 @@ Other parameters are passed through a pointer to a apiDeletePetRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+
+
 
  **apiKey** | **string** |  | 
 
@@ -148,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## FindPetsByStatus
 
-> []Pet FindPetsByStatus(ctx).Status(status).Execute()
+> []Pet FindPetsByStatus(ctx).Status(status).ScalarInt32(scalarInt32).ScalarInt64(scalarInt64).ScalarFloat32(scalarFloat32).ScalarFloat64(scalarFloat64).ArrayInt32(arrayInt32).ArrayInt64(arrayInt64).ArrayFloat32(arrayFloat32).ArrayFloat64(arrayFloat64).ScalarString(scalarString).ScalarBoolean(scalarBoolean).Execute()
 
 Finds Pets by status
 
@@ -168,10 +180,20 @@ import (
 
 func main() {
     status := []string{"Status_example"} // []string | Status values that need to be considered for filter
+    scalarInt32 := int32(56) // int32 |  (optional)
+    scalarInt64 := int64(789) // int64 |  (optional)
+    scalarFloat32 := float32(3.4) // float32 |  (optional)
+    scalarFloat64 := float64(1.2) // float64 |  (optional)
+    arrayInt32 := []int32{int32(123)} // []int32 |  (optional)
+    arrayInt64 := []int64{int64(123)} // []int64 |  (optional)
+    arrayFloat32 := []float32{float32(123)} // []float32 |  (optional)
+    arrayFloat64 := []float64{float64(123)} // []float64 |  (optional)
+    scalarString := "scalarString_example" // string |  (optional)
+    scalarBoolean := true // bool |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PetApi.FindPetsByStatus(context.Background()).Status(status).Execute()
+    resp, r, err := apiClient.PetApi.FindPetsByStatus(context.Background()).Status(status).ScalarInt32(scalarInt32).ScalarInt64(scalarInt64).ScalarFloat32(scalarFloat32).ScalarFloat64(scalarFloat64).ArrayInt32(arrayInt32).ArrayInt64(arrayInt64).ArrayFloat32(arrayFloat32).ArrayFloat64(arrayFloat64).ScalarString(scalarString).ScalarBoolean(scalarBoolean).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PetApi.FindPetsByStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -193,6 +215,16 @@ Other parameters are passed through a pointer to a apiFindPetsByStatusRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **status** | **[]string** | Status values that need to be considered for filter | 
+ **scalarInt32** | **int32** |  | 
+ **scalarInt64** | **int64** |  | 
+ **scalarFloat32** | **float32** |  | 
+ **scalarFloat64** | **float64** |  | 
+ **arrayInt32** | **[]int32** |  | 
+ **arrayInt64** | **[]int64** |  | 
+ **arrayFloat32** | **[]float32** |  | 
+ **arrayFloat64** | **[]float64** |  | 
+ **scalarString** | **string** |  | 
+ **scalarBoolean** | **bool** |  | 
 
 ### Return type
 
@@ -280,7 +312,7 @@ Name | Type | Description  | Notes
 
 ## GetPetById
 
-> Pet GetPetById(ctx, petId).Execute()
+> Pet GetPetById(ctx, petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).Execute()
 
 Find pet by ID
 
@@ -300,10 +332,14 @@ import (
 
 func main() {
     petId := int64(789) // int64 | ID of pet to return
+    scalarInt32 := int32(56) // int32 | 
+    scalarInt64 := int64(789) // int64 | 
+    scalarFloat32 := float32(3.4) // float32 | 
+    scalarFloat64 := float64(1.2) // float64 | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.PetApi.GetPetById(context.Background(), petId).Execute()
+    resp, r, err := apiClient.PetApi.GetPetById(context.Background(), petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PetApi.GetPetById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -320,6 +356,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **petId** | **int64** | ID of pet to return | 
+**scalarInt32** | **int32** |  | 
+**scalarInt64** | **int64** |  | 
+**scalarFloat32** | **float32** |  | 
+**scalarFloat64** | **float64** |  | 
 
 ### Other Parameters
 
@@ -328,6 +368,10 @@ Other parameters are passed through a pointer to a apiGetPetByIdRequest struct v
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+
+
 
 
 ### Return type
@@ -412,7 +456,7 @@ Name | Type | Description  | Notes
 
 ## UpdatePetWithForm
 
-> UpdatePetWithForm(ctx, petId).Name(name).Status(status).Execute()
+> UpdatePetWithForm(ctx, petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).Name(name).Status(status).Execute()
 
 Updates a pet in the store with form data
 
@@ -430,12 +474,16 @@ import (
 
 func main() {
     petId := int64(789) // int64 | ID of pet that needs to be updated
+    scalarInt32 := int32(56) // int32 | 
+    scalarInt64 := int64(789) // int64 | 
+    scalarFloat32 := float32(3.4) // float32 | 
+    scalarFloat64 := float64(1.2) // float64 | 
     name := "name_example" // string | Updated name of the pet (optional)
     status := "status_example" // string | Updated status of the pet (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.PetApi.UpdatePetWithForm(context.Background(), petId).Name(name).Status(status).Execute()
+    r, err := apiClient.PetApi.UpdatePetWithForm(context.Background(), petId, scalarInt32, scalarInt64, scalarFloat32, scalarFloat64).Name(name).Status(status).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PetApi.UpdatePetWithForm``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -450,6 +498,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **petId** | **int64** | ID of pet that needs to be updated | 
+**scalarInt32** | **int32** |  | 
+**scalarInt64** | **int64** |  | 
+**scalarFloat32** | **float32** |  | 
+**scalarFloat64** | **float64** |  | 
 
 ### Other Parameters
 
@@ -458,6 +510,10 @@ Other parameters are passed through a pointer to a apiUpdatePetWithFormRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+
+
+
+
 
  **name** | **string** | Updated name of the pet | 
  **status** | **string** | Updated status of the pet | 

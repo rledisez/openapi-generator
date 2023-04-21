@@ -61,13 +61,13 @@ type UserApiRouter interface {
 // and updated with the logic required for the API.
 type PetApiServicer interface { 
 	AddPet(context.Context, Pet) (ImplResponse, error)
-	DeletePet(context.Context, int64, string) (ImplResponse, error)
-	FindPetsByStatus(context.Context, []string) (ImplResponse, error)
+	DeletePet(context.Context, int64, int32, int64, float32, float64, string) (ImplResponse, error)
+	FindPetsByStatus(context.Context, []string, int32, int64, float32, float64, []int32, []int64, []float32, []float64, string, bool) (ImplResponse, error)
 	// Deprecated
 	FindPetsByTags(context.Context, []string) (ImplResponse, error)
-	GetPetById(context.Context, int64) (ImplResponse, error)
+	GetPetById(context.Context, int64, int32, int64, float32, float64) (ImplResponse, error)
 	UpdatePet(context.Context, Pet) (ImplResponse, error)
-	UpdatePetWithForm(context.Context, int64, string, string) (ImplResponse, error)
+	UpdatePetWithForm(context.Context, int64, int32, int64, float32, float64, string, string) (ImplResponse, error)
 	UploadFile(context.Context, int64, string, *os.File) (ImplResponse, error)
 }
 

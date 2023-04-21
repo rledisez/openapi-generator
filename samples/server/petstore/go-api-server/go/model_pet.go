@@ -34,12 +34,38 @@ type Pet struct {
 	// pet status in the store
 	// Deprecated
 	Status string `json:"status,omitempty"`
+
+	ScalarInt32 int32 `json:"scalar_int32,omitempty"`
+
+	ScalarInt64 int64 `json:"scalar_int64,omitempty"`
+
+	ScalarFloat32 float32 `json:"scalar_float32,omitempty"`
+
+	ScalarFloat64 float64 `json:"scalar_float64,omitempty"`
+
+	ArrayInt32 []int32 `json:"array_int32,omitempty"`
+
+	ArrayInt64 []int64 `json:"array_int64,omitempty"`
+
+	ArrayFloat32 []float32 `json:"array_float32,omitempty"`
+
+	ArrayFloat64 []float64 `json:"array_float64,omitempty"`
+
+	ScalarString string `json:"scalar_string,omitempty"`
+
+	ScalarBoolean bool `json:"scalar_boolean,omitempty"`
 }
 
 // UnmarshalJSON parse JSON while respecting the default values specified
 func (o *Pet) UnmarshalJSON(data []byte) error {
     type Alias Pet // Avoid infinite recursion
     aux := Alias{
+		ScalarInt32: 19,
+		ScalarInt64: 19,
+		ScalarFloat32: 19.19,
+		ScalarFloat64: 19.19,
+		ScalarString: "19",
+		ScalarBoolean: true,
 	}
     if err := json.Unmarshal(data, &aux); err != nil {
         return err
@@ -73,6 +99,30 @@ func AssertPetRequired(obj Pet) error {
 
 // AssertPetConstraints checks if the values respects the defined constraints
 func AssertPetConstraints(obj Pet) error {
+	if obj.ScalarInt32 < 17 {
+		return &ParsingError{Err: errors.New(errMsgMinValueConstraint)}
+	}
+	if obj.ScalarInt32 > 42 {
+		return &ParsingError{Err: errors.New(errMsgMaxValueConstraint)}
+	}
+	if obj.ScalarInt64 < 17 {
+		return &ParsingError{Err: errors.New(errMsgMinValueConstraint)}
+	}
+	if obj.ScalarInt64 > 42 {
+		return &ParsingError{Err: errors.New(errMsgMaxValueConstraint)}
+	}
+	if obj.ScalarFloat32 < 17.17 {
+		return &ParsingError{Err: errors.New(errMsgMinValueConstraint)}
+	}
+	if obj.ScalarFloat32 > 42.42 {
+		return &ParsingError{Err: errors.New(errMsgMaxValueConstraint)}
+	}
+	if obj.ScalarFloat64 < 17.17 {
+		return &ParsingError{Err: errors.New(errMsgMinValueConstraint)}
+	}
+	if obj.ScalarFloat64 > 42.42 {
+		return &ParsingError{Err: errors.New(errMsgMaxValueConstraint)}
+	}
 	return nil
 }
 

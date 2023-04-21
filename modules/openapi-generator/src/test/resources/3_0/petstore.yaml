@@ -98,6 +98,118 @@ paths:
                 - pending
                 - sold
               default: available
+        - name: scalarInt32
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: integer
+            format: int32
+            default: 19
+            minimum: 17
+            maximum: 42
+        - name: scalarInt64
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: integer
+            format: int64
+            default: 19
+            minimum: 17
+            maximum: 42
+        - name: scalarFloat32
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: number
+            format: float
+            default: 19.19
+            minimum: 17.17
+            maximum: 42.42
+        - name: scalarFloat64
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: number
+            format: double
+            default: 19.19
+            minimum: 17.17
+            maximum: 42.42
+        - name: arrayInt32
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+              default: 19
+              minimum: 17
+              maximum: 42
+        - name: arrayInt64
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int64
+              default: 19
+              minimum: 17
+              maximum: 42
+        - name: arrayFloat32
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: number
+              format: float
+              default: 19.19
+              minimum: 17.17
+              maximum: 42.42
+        - name: arrayFloat64
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: array
+            items:
+              type: number
+              format: double
+              default: 19.19
+              minimum: 17.17
+              maximum: 42.42
+        - name: scalarString
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: string
+            default: "19"
+        - name: scalarBoolean
+          in: query
+          style: form
+          explode: false
+          deprecated: true
+          schema:
+            type: boolean
+            default: true
       responses:
         '200':
           description: successful operation
@@ -157,7 +269,7 @@ paths:
         - petstore_auth:
             - 'read:pets'
       deprecated: true
-  '/pet/{petId}':
+  '/pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}':
     get:
       tags:
         - pet
@@ -172,6 +284,38 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: scalarInt32
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 17
+            maximum: 42
+        - name: scalarInt64
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 17
+            maximum: 42
+        - name: scalarFloat32
+          in: path
+          required: true
+          schema:
+            type: number
+            format: float
+            minimum: 17.17
+            maximum: 42.42
+        - name: scalarFloat64
+          in: path
+          required: true
+          schema:
+            type: number
+            format: double
+            minimum: 17.17
+            maximum: 42.42
       responses:
         '200':
           description: successful operation
@@ -202,6 +346,38 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: scalarInt32
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 17
+            maximum: 42
+        - name: scalarInt64
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 17
+            maximum: 42
+        - name: scalarFloat32
+          in: path
+          required: true
+          schema:
+            type: number
+            format: float
+            minimum: 17.17
+            maximum: 42.42
+        - name: scalarFloat64
+          in: path
+          required: true
+          schema:
+            type: number
+            format: double
+            minimum: 17.17
+            maximum: 42.42
       responses:
         '405':
           description: Invalid input
@@ -240,6 +416,38 @@ paths:
           schema:
             type: integer
             format: int64
+        - name: scalarInt32
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 17
+            maximum: 42
+        - name: scalarInt64
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+            minimum: 17
+            maximum: 42
+        - name: scalarFloat32
+          in: path
+          required: true
+          schema:
+            type: number
+            format: float
+            minimum: 17.17
+            maximum: 42.42
+        - name: scalarFloat64
+          in: path
+          required: true
+          schema:
+            type: number
+            format: double
+            minimum: 17.17
+            maximum: 42.42
       responses:
         '400':
           description: Invalid pet value
@@ -725,6 +933,64 @@ components:
             - available
             - pending
             - sold
+        scalar_int32:
+          type: integer
+          format: int32
+          default: 19
+          minimum: 17
+          maximum: 42
+        scalar_int64:
+          type: integer
+          format: int64
+          default: 19
+          minimum: 17
+          maximum: 42
+        scalar_float32:
+          type: number
+          format: float
+          default: 19.19
+          minimum: 17.17
+          maximum: 42.42
+        scalar_float64:
+          type: number
+          format: double
+          default: 19.19
+          minimum: 17.17
+          maximum: 42.42
+        array_int32:
+          type: array
+          items:
+            type: integer
+            format: int32
+            minimum: 17
+            maximum: 42
+        array_int64:
+          type: array
+          items:
+            type: integer
+            format: int64
+            minimum: 17
+            maximum: 42
+        array_float32:
+          type: array
+          items:
+            type: number
+            format: float
+            minimum: 17.17
+            maximum: 42.42
+        array_float64:
+          type: array
+          items:
+            type: number
+            format: double
+            minimum: 17.17
+            maximum: 42.42
+        scalar_string:
+          type: string
+          default: "19"
+        scalar_boolean:
+          type: boolean
+          default: true
       xml:
         name: Pet
     ApiResponse:

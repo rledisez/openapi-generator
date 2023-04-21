@@ -99,6 +99,70 @@ paths:
             type: string
           type: array
         style: form
+      - in: query
+        name: scalarInt32
+        schema:
+          format: int32
+          type: integer
+      - in: query
+        name: scalarInt64
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: scalarFloat32
+        schema:
+          format: float
+          type: number
+      - in: query
+        name: scalarFloat64
+        schema:
+          format: double
+          type: number
+      - explode: false
+        in: query
+        name: arrayInt32
+        schema:
+          items:
+            format: int32
+            type: integer
+          type: array
+        style: form
+      - explode: false
+        in: query
+        name: arrayInt64
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      - explode: false
+        in: query
+        name: arrayFloat32
+        schema:
+          items:
+            format: float
+            type: number
+          type: array
+        style: form
+      - explode: false
+        in: query
+        name: arrayFloat64
+        schema:
+          items:
+            format: double
+            type: number
+          type: array
+        style: form
+      - in: query
+        name: scalarString
+        schema:
+          type: string
+      - in: query
+        name: scalarBoolean
+        schema:
+          type: boolean
       responses:
         "200":
           content:
@@ -167,7 +231,7 @@ paths:
       summary: Finds Pets by tags
       tags:
       - pet
-  /pet/{petId}:
+  /pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}:
     delete:
       operationId: deletePet
       parameters:
@@ -182,6 +246,30 @@ paths:
         schema:
           format: int64
           type: integer
+      - in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          type: number
+      - in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          type: number
       responses:
         "200":
           content: {}
@@ -207,6 +295,30 @@ paths:
         schema:
           format: int64
           type: integer
+      - in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          type: number
+      - in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          type: number
       responses:
         "200":
           content:
@@ -238,6 +350,30 @@ paths:
         schema:
           format: int64
           type: integer
+      - in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          type: integer
+      - in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          type: number
+      - in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          type: number
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -1180,19 +1316,37 @@ components:
         name: Tag
     Pet:
       example:
+        scalar_float64: 35.00003813479535
         photoUrls:
         - photoUrls
         - photoUrls
-        name: doggie
-        id: 0
-        category:
-          name: default-name
-          id: 6
+        scalar_boolean: true
+        scalar_float32: 22.982893
         tags:
         - name: name
           id: 1
         - name: name
           id: 1
+        scalar_string: "19"
+        array_float32:
+        - 22.288486
+        - 22.288486
+        array_float64:
+        - 27.637660275456938
+        - 27.637660275456938
+        array_int64:
+        - 26
+        - 26
+        name: doggie
+        array_int32:
+        - 40
+        - 40
+        scalar_int32: 31
+        id: 0
+        scalar_int64: 31
+        category:
+          name: default-name
+          id: 6
         status: available
       properties:
         id:
@@ -1226,6 +1380,64 @@ components:
           - pending
           - sold
           type: string
+        scalar_int32:
+          default: 19
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        scalar_int64:
+          default: 19
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        scalar_float32:
+          default: 19.19
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        scalar_float64:
+          default: 19.19
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        array_int32:
+          items:
+            format: int32
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        array_int64:
+          items:
+            format: int64
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        array_float32:
+          items:
+            format: float
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        array_float64:
+          items:
+            format: double
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        scalar_string:
+          default: "19"
+          type: string
+        scalar_boolean:
+          default: true
+          type: boolean
       required:
       - name
       - photoUrls

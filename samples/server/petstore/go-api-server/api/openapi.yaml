@@ -97,6 +97,128 @@ paths:
             type: string
           type: array
         style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarInt32
+        required: false
+        schema:
+          default: 19
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarInt64
+        required: false
+        schema:
+          default: 19
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarFloat32
+        required: false
+        schema:
+          default: 19.19
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarFloat64
+        required: false
+        schema:
+          default: 19.19
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: arrayInt32
+        required: false
+        schema:
+          items:
+            default: 19
+            format: int32
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: arrayInt64
+        required: false
+        schema:
+          items:
+            default: 19
+            format: int64
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: arrayFloat32
+        required: false
+        schema:
+          items:
+            default: 19.19
+            format: float
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: arrayFloat64
+        required: false
+        schema:
+          items:
+            default: 19.19
+            format: double
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarString
+        required: false
+        schema:
+          default: "19"
+          type: string
+        style: form
+      - deprecated: true
+        explode: false
+        in: query
+        name: scalarBoolean
+        required: false
+        schema:
+          default: true
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -158,7 +280,7 @@ paths:
       summary: Finds Pets by tags
       tags:
       - pet
-  /pet/{petId}:
+  /pet/{petId}/{scalarInt32}/{scalarInt64}/{scalarFloat32}/{scalarFloat64}:
     delete:
       description: ""
       operationId: deletePet
@@ -178,6 +300,46 @@ paths:
         schema:
           format: int64
           type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
         style: simple
       responses:
         "400":
@@ -201,6 +363,46 @@ paths:
         schema:
           format: int64
           type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
         style: simple
       responses:
         "200":
@@ -233,6 +435,46 @@ paths:
         schema:
           format: int64
           type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt32
+        required: true
+        schema:
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarInt64
+        required: true
+        schema:
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat32
+        required: true
+        schema:
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        style: simple
+      - explode: false
+        in: path
+        name: scalarFloat64
+        required: true
+        schema:
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
         style: simple
       requestBody:
         content:
@@ -709,19 +951,37 @@ components:
     Pet:
       description: A pet for sale in the pet store
       example:
+        scalar_float64: 35.00003813479535
         photoUrls:
         - photoUrls
         - photoUrls
-        name: doggie
-        id: 0
-        category:
-          name: name
-          id: 6
+        scalar_boolean: true
+        scalar_float32: 22.982893
         tags:
         - name: name
           id: 1
         - name: name
           id: 1
+        scalar_string: "19"
+        array_float32:
+        - 22.288486
+        - 22.288486
+        array_float64:
+        - 27.637660275456938
+        - 27.637660275456938
+        array_int64:
+        - 26
+        - 26
+        name: doggie
+        array_int32:
+        - 40
+        - 40
+        scalar_int32: 31
+        id: 0
+        scalar_int64: 31
+        category:
+          name: name
+          id: 6
         status: available
       properties:
         id:
@@ -754,6 +1014,64 @@ components:
           - pending
           - sold
           type: string
+        scalar_int32:
+          default: 19
+          format: int32
+          maximum: 42
+          minimum: 17
+          type: integer
+        scalar_int64:
+          default: 19
+          format: int64
+          maximum: 42
+          minimum: 17
+          type: integer
+        scalar_float32:
+          default: 19.19
+          format: float
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        scalar_float64:
+          default: 19.19
+          format: double
+          maximum: 42.42
+          minimum: 17.17
+          type: number
+        array_int32:
+          items:
+            format: int32
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        array_int64:
+          items:
+            format: int64
+            maximum: 42
+            minimum: 17
+            type: integer
+          type: array
+        array_float32:
+          items:
+            format: float
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        array_float64:
+          items:
+            format: double
+            maximum: 42.42
+            minimum: 17.17
+            type: number
+          type: array
+        scalar_string:
+          default: "19"
+          type: string
+        scalar_boolean:
+          default: true
+          type: boolean
       required:
       - name
       - photoUrls
